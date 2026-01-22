@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+@source "../src/**/*.{ts,vue}";
 
 * {
   line-height: 1.6;
@@ -33,7 +34,7 @@ body {
 }
 
 input.input-error {
-  @apply !ring-1 !ring-red-600 !border-red-600 !bg-red-50;
+  @apply ring-1 ring-red-600 border-red-600 bg-red-50;
 }
 
 .text-shadow {

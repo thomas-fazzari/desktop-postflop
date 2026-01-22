@@ -1083,6 +1083,8 @@ const cancelEdit = () => {
 </script>
 
 <style scoped>
+@reference "tailwindcss";
+
 input {
   @apply disabled:cursor-not-allowed;
 }

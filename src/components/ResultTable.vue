@@ -1042,6 +1042,8 @@ let strTmp = "";
 </script>
 
 <style scoped>
+@reference "tailwindcss";
+
 .header-divider::before {
   content: "";
   @apply absolute left-0 -bottom-px w-full border-b border-gray-300;

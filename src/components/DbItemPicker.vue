@@ -1305,6 +1305,8 @@ const exportJson = async () => {
 </script>
 
 <style scoped>
+@reference "tailwindcss";
+
 .group {
   @apply relative pl-5;
 }

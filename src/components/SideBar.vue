@@ -82,6 +82,8 @@ const boardTexts = computed(() => {
 </script>
 
 <style scoped>
+@reference "tailwindcss";
+
 .side-bar-item {
   @apply block mx-2 my-[0.1875rem] px-4 py-2.5 rounded-3xl;
   @apply text-left text-[1.0625rem] select-none;

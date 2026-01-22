@@ -487,6 +487,8 @@ let strTmp = "";
 </script>
 
 <style scoped>
+@reference "tailwindcss";
+
 .clicked-cell::before {
   content: "";
   @apply absolute -left-px -top-px z-10 border-2 border-red-500;

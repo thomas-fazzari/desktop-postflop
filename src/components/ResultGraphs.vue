@@ -16,7 +16,7 @@
       <div class="relative mx-4 mt-6 mb-8" style="flex: 2">
         <div
           v-if="displayPlayer === ['', 'oop', 'ip'][playerIndex + 1]"
-          class="absolute flex left-[3.25rem] top-0 h-full"
+          class="absolute flex left-13 top-0 h-full"
           :style="{ width: `${chartWidth}px` }"
           @mouseleave="tableScrollTarget = null"
         >
@@ -242,9 +242,12 @@ const chartData = computed((): ChartData<"line", Point[]> => {
 
 const chartOptions = computed((): ChartOptions<"line"> => {
   const content = props.displayOptions.contentGraphs;
-  const styleY = content === "ev" ? "decimal" : "percent";
-  const formatX = { style: "percent", minimumFractionDigits: 0 };
-  const formatY = {
+  const styleY = content === "ev" ? ("decimal" as const) : ("percent" as const);
+  const formatX: Intl.NumberFormatOptions = {
+    style: "percent",
+    minimumFractionDigits: 0,
+  };
+  const formatY: Intl.NumberFormatOptions = {
     style: styleY,
     useGrouping: false,
     minimumFractionDigits: 0,
@@ -268,18 +271,13 @@ const chartOptions = computed((): ChartOptions<"line"> => {
         min: content === "eq" ? 0 : undefined,
         max: content === "eq" ? 1 : undefined,
         suggestedMin: content === "ev" ? 0 : undefined,
-        ticks: {
-          format: formatY,
-        },
+        ticks: { format: formatY },
         afterFit(axis) {
           axis.width = 52;
         },
       },
     },
-    interaction: {
-      intersect: false,
-      mode: "index",
-    },
+    interaction: { intersect: false, mode: "index" },
     plugins: {
       legend: {
         labels: {
@@ -297,7 +295,7 @@ const chartOptions = computed((): ChartOptions<"line"> => {
             return "";
           },
           label(context) {
-            const value = context.parsed.y;
+            const value = context.parsed.y ?? 0;
             const cardPair = (context.raw as { label: number }).label;
             if (props.displayPlayer === ["oop", "ip"][context.datasetIndex]) {
               tableScrollTarget.value = cardPair;

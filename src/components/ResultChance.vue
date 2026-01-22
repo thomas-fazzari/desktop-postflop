@@ -9,7 +9,7 @@
         :key="suit"
         class="flex shrink-0 w-full justify-center gap-[1%]"
       >
-        <div class="w-[3.25rem]"></div>
+        <div class="w-13"></div>
         <BoardSelectorCard
           v-for="rank in 13"
           :key="rank"
@@ -26,7 +26,7 @@
 
       <div
         ref="chartParentDiv"
-        class="relative flex-grow max-h-[50%] my-1.5"
+        class="relative grow max-h-[50%] my-1.5"
         style="width: calc(84.5% + 3.25rem)"
       >
         <div
@@ -105,9 +105,7 @@ const props = defineProps<{
   displayPlayer: "oop" | "ip";
 }>();
 
-const emit = defineEmits<{
-  (event: "deal-card", card: number): void;
-}>();
+const emit = defineEmits<{ (event: "deal-card", card: number): void }>();
 
 const chartParentDiv = ref<HTMLDivElement | null>(null);
 const chartParentDivHeight = ref(0);
@@ -175,8 +173,8 @@ const chartData = computed((): ChartData<"bar", number[]> | null => {
       options.chartChance === "eq"
         ? reports.equity[playerIndex]
         : options.chartChance === "ev"
-        ? reports.ev[playerIndex]
-        : reports.eqr[playerIndex];
+          ? reports.ev[playerIndex]
+          : reports.eqr[playerIndex];
     datasets = Array.from({ length: 4 }, (_, suit) => ({
       data: Array.from(
         { length: 13 },
@@ -194,9 +192,13 @@ const chartData = computed((): ChartData<"bar", number[]> | null => {
 const chartOptions = computed((): ChartOptions<"bar"> => {
   const option = props.displayOptions.chartChance;
   const style = ["strategy", "eq", "eqr"].includes(option)
-    ? "percent"
-    : "decimal";
-  const format = { style, useGrouping: false, minimumFractionDigits: 0 };
+    ? ("percent" as const)
+    : ("decimal" as const);
+  const format: Intl.NumberFormatOptions = {
+    style,
+    useGrouping: false,
+    minimumFractionDigits: 0,
+  };
 
   const titleText =
     props.displayPlayer.toUpperCase() +
@@ -232,9 +234,7 @@ const chartOptions = computed((): ChartOptions<"bar"> => {
         font: { size: 16, weight: "normal" },
         color: "rgba(0, 0, 0, 0.9)",
       },
-      legend: {
-        display: false,
-      },
+      legend: { display: false },
       tooltip: {
         titleMarginBottom: 4,
         callbacks: {
@@ -244,7 +244,7 @@ const chartOptions = computed((): ChartOptions<"bar"> => {
             return ranks[rank] + suits[suit];
           },
           label(context) {
-            const value = context.parsed.y;
+            const value = context.parsed.y ?? 0;
             let label = context.dataset.label ?? "";
             if (label) label += ": ";
             if (["strategy-combos", "ev"].includes(option)) {

@@ -13,6 +13,8 @@
 </template>
 
 <style scoped>
+@reference "tailwindcss";
+
 .link {
   @apply text-blue-500 hover:underline;
 }
