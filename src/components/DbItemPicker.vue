@@ -467,8 +467,8 @@
 import { computed, nextTick, ref } from "vue";
 import * as Db from "../db";
 
-import { open, save } from "@tauri-apps/api/dialog";
-import { readTextFile, writeTextFile } from "@tauri-apps/api/fs";
+import { open, save } from "@tauri-apps/plugin-dialog";
+import { readTextFile, writeTextFile } from "@tauri-apps/plugin-fs";
 
 import { XMarkIcon } from "@heroicons/vue/20/solid";
 
@@ -1230,6 +1230,7 @@ const importJson = async () => {
 
   if (!filePath) return;
   if (Array.isArray(filePath)) filePath = filePath[0];
+  if (!filePath) return;
 
   importError.value = "";
 

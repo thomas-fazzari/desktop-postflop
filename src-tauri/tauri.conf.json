@@ -1,61 +1,15 @@
 {
-  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Desktop Postflop",
+  "version": "0.2.7",
+  "identifier": "b-inary.desktop-postflop",
   "build": {
     "beforeBuildCommand": "npm run build",
     "beforeDevCommand": "npm run dev",
-    "devPath": "http://localhost:5173",
-    "distDir": "../dist"
+    "devUrl": "http://localhost:5173",
+    "frontendDist": "../dist"
   },
-  "package": {
-    "productName": "Desktop Postflop",
-    "version": "0.2.7"
-  },
-  "tauri": {
-    "allowlist": {
-      "dialog": { "open": true, "save": true },
-      "fs": { "readFile": true, "writeFile": true },
-      "shell": { "open": "^https://github.com/" }
-    },
-    "bundle": {
-      "active": true,
-      "category": "Utility",
-      "copyright": "Copyright (C) 2022 Wataru Inariba",
-      "deb": {
-        "depends": []
-      },
-      "externalBin": [],
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "identifier": "b-inary.desktop-postflop",
-      "longDescription": "",
-      "macOS": {
-        "entitlements": null,
-        "exceptionDomain": "",
-        "frameworks": [],
-        "providerShortName": null,
-        "signingIdentity": null,
-        "minimumSystemVersion": "11.7"
-      },
-      "resources": [],
-      "shortDescription": "",
-      "targets": "all",
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": ""
-      }
-    },
-    "security": {
-      "csp": "default-src 'self'; img-src 'self' data:;"
-    },
-    "updater": {
-      "active": false
-    },
+  "app": {
     "windows": [
       {
         "title": "Desktop Postflop",
@@ -64,6 +18,37 @@
         "minWidth": 1080,
         "minHeight": 720
       }
-    ]
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' data:;"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "category": "Utility",
+    "copyright": "Copyright (C) 2022 Wataru Inariba",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "linux": {
+      "deb": {
+        "depends": []
+      }
+    },
+    "macOS": {
+      "minimumSystemVersion": "11.7"
+    },
+    "windows": {
+      "digestAlgorithm": "sha256"
+    }
+  },
+  "plugins": {
+    "shell": {
+      "open": "^https://github.com/"
+    }
   }
 }

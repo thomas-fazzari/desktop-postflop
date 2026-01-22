@@ -15,10 +15,13 @@ use crate::tree::*;
 use postflop_solver::*;
 use rayon::{ThreadPool, ThreadPoolBuilder};
 use std::sync::Mutex;
-use sysinfo::{System, SystemExt};
+use sysinfo::System;
 
 fn main() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_shell::init())
         .manage(Mutex::new(RangeManager::default()))
         .manage(Mutex::new(default_action_tree()))
         .manage(Mutex::new(None as Option<BunchingData>))
@@ -94,8 +97,7 @@ fn os_name() -> String {
 
 #[tauri::command]
 fn memory() -> (u64, u64) {
-    let mut system = System::new_all();
-    system.refresh_memory();
+    let system = System::new_all();
     (system.available_memory(), system.total_memory())
 }
 

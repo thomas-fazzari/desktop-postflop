@@ -10,20 +10,6 @@
         </div>
       </div>
 
-      <div class="flex ml-auto h-full items-center z-10">
-        <a
-          href="https://github.com/b-inary/desktop-postflop"
-          class="flex px-4 h-full items-center font-semibold hover:bg-slate-700"
-          target="_blank"
-        >
-          <img
-            src="../assets/GitHub-Mark-Light-32px.png"
-            class="inline-block w-5 h-5 mr-2.5"
-          />
-          GitHub
-        </a>
-      </div>
-
       <div
         class="flex absolute w-full h-full left-0 top-0 gap-3 justify-center"
       >
